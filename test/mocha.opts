@@ -1,0 +1,2 @@
+--require ./test/ts-bootstrap.js
+src/**/*.test.ts
