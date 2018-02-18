@@ -3,7 +3,7 @@ node_js:
     - "node"
 branches:
     only:
-        - testing
+        - development
 cache:
     directories:
         - "node_modules"
