@@ -4,9 +4,10 @@
     "description": "_work in progress_",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=test nyc mocha",
         "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "coverage:view": "opn coverage/index.html",
+        "lint": "tslint --project . --fix",
+        "test": "cross-env NODE_ENV=test nyc mocha",
         "test:watch": "mocha --reporter min --watch"
     },
     "repository": {
