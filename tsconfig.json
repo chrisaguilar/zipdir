@@ -3,7 +3,6 @@
         "alwaysStrict": true,
         "baseUrl": "./",
         "declaration": true,
-        "module": "commonjs",
         "moduleResolution": "node",
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
@@ -21,6 +20,6 @@
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "target": "es5"
+        "target": "esnext"
     }
 }

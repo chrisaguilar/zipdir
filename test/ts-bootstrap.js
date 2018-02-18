@@ -8,11 +8,10 @@ const baseUrl = path.join(__dirname, '..');
 require('ts-node').register({
     cache: true,
     cacheDirectory: path.join(__dirname, '../node_modules/.cache/ts-node'),
-    typeCheck: true,
+    typeCheck: false,
     compilerOptions: {
         ...tsConfig.compilerOptions,
-        module: 'commonjs',
-        target: 'es5'
+        module: 'commonjs'
     },
     project: path.join(__dirname, '../tsconfig.json')
 });
