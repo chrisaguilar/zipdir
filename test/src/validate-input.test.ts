@@ -22,12 +22,6 @@ describe('validate-input', () => {
 
     after(async () => await fs.remove(testDir));
 
-    it('should throw if not given any arguments', async () => {
-        await validateInput().catch(e => {
-            expect(e.message).to.equal('Expected at least one argument, got 0');
-        });
-    });
-
     it('should throw if not given an array', async () => {
         const testCases = [true, 'foobar', 12, {}, null, function() {}];
 
@@ -57,8 +51,8 @@ describe('validate-input', () => {
         }
     });
 
-    it('should throw if given more than one argument', async () => {
-        const testCases = [[['a', 'b', 'c'], 'd']];
+    it('should throw if given an invalid number of arguments', async () => {
+        const testCases = [[], [['a', 'b', 'c'], 'd']];
 
         for (const testCase of testCases) {
             await validateInput(...(testCase as any)).catch(e => {
