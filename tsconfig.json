@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "plugins": [
+            {"name": "tslint-language-service"}
+        ],
         "alwaysStrict": true,
         "baseUrl": "./",
         "declaration": true,
