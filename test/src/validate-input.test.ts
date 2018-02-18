@@ -1,3 +1,4 @@
+// tslint:disable
 import * as path from 'path';
 
 import { expect } from 'chai';
