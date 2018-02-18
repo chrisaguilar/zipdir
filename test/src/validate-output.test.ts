@@ -1,5 +1,4 @@
-import * as path from 'path';
-
+// tslint:disable
 import { expect } from 'chai';
 import * as fs from 'fs-extra';
 
@@ -36,7 +35,7 @@ describe('validate-output', () => {
         const testCases = [1, true, null, function() {}, {}];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase as any).catch(e => {
                 expect(e.message).to.equal(`Expected string, got ${typeof testCase}`);
                 expect(e.name).to.equal('TypeError');
             });
