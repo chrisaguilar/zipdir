@@ -9,9 +9,9 @@ const readdir = util.promisify(fs.readdir);
 
 export async function validateOutput(dir: string, ...args: any[]): Promise<void> {
     if (dir === undefined) throw new Error('Expected one argument, got 0');
-    if (args.length > 0) throw new Error(`Expected one argument, got ${args.length + 1}`);
-    if (typeof dir !== 'string') throw new Error(`Expected string, got ${typeof dir}`);
-    if (sanitize(dir) === '') throw new Error(`Expected valid filename, got "${dir}"`);
+    else if (args.length > 0) throw new Error(`Expected one argument, got ${args.length + 1}`);
+    else if (typeof dir !== 'string') throw new Error(`Expected string, got ${typeof dir}`);
+    else if (sanitize(dir) === '') throw new Error(`Expected valid filename, got "${dir}"`);
 
     const directory = path.resolve(sanitize(dir));
 

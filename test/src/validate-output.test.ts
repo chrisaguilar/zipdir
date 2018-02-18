@@ -6,13 +6,14 @@ import * as fs from 'fs-extra';
 import { validateOutput } from '~zipdir/validate-output';
 
 describe('validate-output', () => {
-    const dir1 = path.resolve('testDir1');
-    const dir2 = path.resolve('testDir2');
+    const dir1 = 'testDir1';
+    const dir2 = 'testDir2';
+    const file1 = `${dir1}/foobar.txt`;
 
     before(async () => {
         await fs.mkdir(dir1);
         await fs.mkdir(dir2);
-        await fs.ensureFile(path.resolve(dir1, 'foobar.txt'));
+        await fs.ensureFile(file1);
     });
 
     after(async () => {
@@ -45,8 +46,18 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
-                expect(e.message).to.equal(`Expected valid filename, got "${testCase}"`)
-            })
+                expect(e.message).to.equal(`Expected valid filename, got "${testCase}"`);
+            });
+        }
+    });
+
+    it('should throw if the given path exists and is not a directory', async () => {
+        const testCases = [file1];
+
+        for (const testCase of testCases) {
+            await validateOutput(testCase).catch(e => {
+                expect(e.message).to.equal(`Expected "${path.resolve(testCase)}" to be a directory`);
+            });
         }
     });
 
@@ -55,8 +66,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
-                expect(e.message).to.equal(`Expected directory "${testCase}" to be empty`);
-            })
+                expect(e.message).to.equal(`Expected directory "${path.resolve(testCase)}" to be empty`);
+            });
         }
     });
 
@@ -66,7 +77,7 @@ describe('validate-output', () => {
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
                 expect(e).to.not.exist;
-            })
+            });
         }
     });
 
@@ -76,7 +87,7 @@ describe('validate-output', () => {
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
                 expect(e).to.not.exist;
-            })
+            });
         }
     });
 });
