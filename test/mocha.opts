@@ -1,2 +1,6 @@
 --require ./test/ts-bootstrap.js
-src/**/*.test.ts
+--require source-map-support/register
+--growl
+--sort
+--recursive
+test/**/*.test.ts
