@@ -8,17 +8,25 @@ const lstat = util.promisify(fs.lstat);
 const readdir = util.promisify(fs.readdir);
 
 export async function validateOutput(dir: string, ...args: any[]): Promise<void> {
-    if (dir === undefined) throw new Error('Expected one argument, got 0');
-    else if (args.length > 0) throw new Error(`Expected one argument, got ${args.length + 1}`);
-    else if (typeof dir !== 'string') throw new Error(`Expected string, got ${typeof dir}`);
-    else if (sanitize(dir) === '') throw new Error(`Expected valid filename, got "${dir}"`);
-
-    const directory = path.resolve(sanitize(dir));
-
+    const sanitized = typeof dir === 'string' && dir.replace(/[^a-z0-9/._-]/gi, '_');
+    const directory = path.resolve(sanitized || '');
     const stat = await lstat(directory).catch(_ => {});
 
-    if (stat && !stat.isDirectory()) throw new Error(`Expected "${directory}" to be a directory`);
-    else if (stat && stat.isDirectory() && (await readdir(directory)).length > 0)
-        throw new Error(`Expected directory "${directory}" to be empty`);
+    if ([...arguments].length === 0)
+        throw new SyntaxError('Expected one argument, got 0');
 
+    else if (args.length > 0)
+        throw new SyntaxError(`Expected one argument, got ${args.length + 1}`);
+
+    else if (typeof dir !== 'string')
+        throw new TypeError(`Expected string, got ${typeof dir}`);
+
+    else if (sanitize(dir) === '')
+        throw new Error(`Expected valid filename, got "${dir}"`);
+
+    else if (stat && !stat.isDirectory())
+        throw new Error(`Expected "${dir}" to be a directory`);
+
+    else if (stat && stat.isDirectory() && (await readdir(directory)).length > 0)
+        throw new Error(`Expected directory "${dir}" to be empty`);
 }

@@ -27,6 +27,7 @@ describe('validate-output', () => {
         for (const testCase of testCases) {
             await validateOutput(...testCase).catch(e => {
                 expect(e.message).to.equal(`Expected one argument, got ${testCase.length}`);
+                expect(e.name).to.equal('SyntaxError');
             });
         }
     });
@@ -37,6 +38,7 @@ describe('validate-output', () => {
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
                 expect(e.message).to.equal(`Expected string, got ${typeof testCase}`);
+                expect(e.name).to.equal('TypeError');
             });
         }
     });
@@ -47,6 +49,7 @@ describe('validate-output', () => {
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
                 expect(e.message).to.equal(`Expected valid filename, got "${testCase}"`);
+                expect(e.name).to.equal('Error');
             });
         }
     });
@@ -56,7 +59,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
-                expect(e.message).to.equal(`Expected "${path.resolve(testCase)}" to be a directory`);
+                expect(e.message).to.equal(`Expected "${testCase}" to be a directory`);
+                expect(e.name).to.equal('Error');
             });
         }
     });
@@ -66,7 +70,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch(e => {
-                expect(e.message).to.equal(`Expected directory "${path.resolve(testCase)}" to be empty`);
+                expect(e.message).to.equal(`Expected directory "${testCase}" to be empty`);
+                expect(e.name).to.equal('Error');
             });
         }
     });
