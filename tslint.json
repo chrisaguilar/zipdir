@@ -1,3 +1,8 @@
 {
-    "extends": "@chrisaguilar/tslint-config"
+    "extends": "@chrisaguilar/tslint-config",
+    "rules": {
+        "no-unnecessary-type-assertion": true,
+        "typedef": false,
+        "completed-docs": false
+    }
 }
