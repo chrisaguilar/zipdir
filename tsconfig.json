@@ -15,6 +15,7 @@
         "noUnusedParameters": true,
         "outDir": "./lib",
         "paths": {
+            "~zipdir": ["src/index.ts"],
             "~zipdir/*": ["src/*"]
         },
         "removeComments": true,
