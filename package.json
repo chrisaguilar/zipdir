@@ -7,9 +7,19 @@
         "cleanup": "rimraf .nyc_output coverage",
         "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "coverage:view": "opn coverage/index.html",
-        "lint": "tslint --project . --fix",
+        "lint": "run-s -n lint:*",
+        "lint:prettier": "prettier \"src/**/*\" \"test/**/*\" --write",
+        "lint:tslint": "tslint --project tsconfig.json --fix",
+        "precommit": "lint-staged",
         "test": "cross-env NODE_ENV=test nyc mocha",
         "test:watch": "mocha --reporter min --watch"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "prettier --write",
+            "tslint --project tsconfig.json --fix",
+            "git add"
+        ]
     },
     "repository": {
         "type": "git",
