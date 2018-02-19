@@ -1,6 +1,5 @@
 --require ./test/ts-bootstrap.js
 --require source-map-support/register
---growl
 --sort
 --recursive
 test/**/*.test.ts
