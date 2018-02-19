@@ -27,7 +27,7 @@ describe('validate-input', () => {
         const testCases = [true, 'foobar', 12, {}, null, function() {}];
 
         for (const testCase of testCases) {
-            await validateInput(testCase as any).catch(e => {
+            await validateInput(testCase as any).catch((e) => {
                 expect(e.message).to.equal(`Expected array, got ${typeof testCase}`);
                 expect(e.name).to.equal('TypeError');
             });
@@ -38,7 +38,7 @@ describe('validate-input', () => {
         const testCases = [[true, false, true], [12, 13, 14], [null, undefined, null]];
 
         for (const testCase of testCases) {
-            await validateInput(testCase as any).catch(e => {
+            await validateInput(testCase as any).catch((e) => {
                 expect(e.message).to.equal('Expected an array of strings');
                 expect(e.name).to.equal('TypeError');
             });
@@ -48,7 +48,7 @@ describe('validate-input', () => {
     it('should throw if not given an array of length >= 2', async () => {
         const testCases = [[], ['a']];
         for (const testCase of testCases) {
-            await validateInput(testCase as any).catch(e => {
+            await validateInput(testCase as any).catch((e) => {
                 expect(e.message).to.equal('Expected an array of at least length 2');
                 expect(e.name).to.equal('SyntaxError');
             });
@@ -59,7 +59,7 @@ describe('validate-input', () => {
         const testCases = [[], [['a', 'b', 'c'], 'd']];
 
         for (const testCase of testCases) {
-            await validateInput(...(testCase as any)).catch(e => {
+            await validateInput(...(testCase as any)).catch((e) => {
                 expect(e.message).to.equal(`Expected one argument, got ${testCase.length}`);
                 expect(e.name).to.equal('SyntaxError');
             });
@@ -76,7 +76,7 @@ describe('validate-input', () => {
         ];
 
         for (const [i, testCase] of Object.entries(testCases)) {
-            await validateInput(testCase as any).catch(e => {
+            await validateInput(testCase as any).catch((e) => {
                 expect(e.message).to.equal(`"${path.resolve(testCase[+i])}" is not a file or directory`);
                 expect(e.name).to.equal('Error');
             });
@@ -92,7 +92,7 @@ describe('validate-input', () => {
         ];
 
         for (const testCase of testCases) {
-            await validateInput(testCase as any).catch(e => {
+            await validateInput(testCase as any).catch((e) => {
                 expect(e.message).to.equal(`"${file1}" is not a directory`);
                 expect(e.name).to.equal('Error');
             });

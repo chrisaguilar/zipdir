@@ -11,8 +11,8 @@ export async function validateInput (dirs: string[], ...args: any[]): Promise<vo
         throw new SyntaxError(`Expected one argument, got ${args.length + 1}`);
     } else if (!Array.isArray(dirs)) {
         throw new TypeError(`Expected array, got ${typeof dirs}`);
-    // tslint:disable-next-line:strict-type-predicates
-    } else if (!dirs.every(e => typeof e === 'string')) {
+        // tslint:disable-next-line:strict-type-predicates
+    } else if (!dirs.every((e) => typeof e === 'string')) {
         throw new TypeError('Expected an array of strings');
     } else if (dirs.length < 2) {
         throw new SyntaxError('Expected an array of at least length 2');
@@ -21,7 +21,7 @@ export async function validateInput (dirs: string[], ...args: any[]): Promise<vo
     for (const dir of dirs) {
         const directory = path.resolve(dir);
 
-        const stat = await lstat(directory).catch(_ => {
+        const stat = await lstat(directory).catch((_) => {
             throw new Error(`"${directory}" is not a file or directory`);
         });
 

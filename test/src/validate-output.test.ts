@@ -24,7 +24,7 @@ describe('validate-output', () => {
         const testCases = [[], [dir1, dir2], ['a', 'b', 'c', 'd']];
 
         for (const testCase of testCases) {
-            await validateOutput(...testCase).catch(e => {
+            await validateOutput(...testCase).catch((e) => {
                 expect(e.message).to.equal(`Expected one argument, got ${testCase.length}`);
                 expect(e.name).to.equal('SyntaxError');
             });
@@ -35,7 +35,7 @@ describe('validate-output', () => {
         const testCases = [1, true, null, function() {}, {}];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase as any).catch(e => {
+            await validateOutput(testCase as any).catch((e) => {
                 expect(e.message).to.equal(`Expected string, got ${typeof testCase}`);
                 expect(e.name).to.equal('TypeError');
             });
@@ -46,7 +46,7 @@ describe('validate-output', () => {
         const testCases = [';;;', '&&&', '*', ')', '/'];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase).catch((e) => {
                 expect(e.message).to.equal(`Expected valid filename, got "${testCase}"`);
                 expect(e.name).to.equal('Error');
             });
@@ -57,7 +57,7 @@ describe('validate-output', () => {
         const testCases = [file1];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase).catch((e) => {
                 expect(e.message).to.equal(`Expected "${testCase}" to be a directory`);
                 expect(e.name).to.equal('Error');
             });
@@ -68,7 +68,7 @@ describe('validate-output', () => {
         const testCases = [dir1];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase).catch((e) => {
                 expect(e.message).to.equal(`Expected directory "${testCase}" to be empty`);
                 expect(e.name).to.equal('Error');
             });
@@ -79,7 +79,7 @@ describe('validate-output', () => {
         const testCases = [dir2];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase).catch((e) => {
                 expect(e).to.not.exist;
             });
         }
@@ -89,7 +89,7 @@ describe('validate-output', () => {
         const testCases = ['testDir3', 'testDir4', 'testDir5'];
 
         for (const testCase of testCases) {
-            await validateOutput(testCase).catch(e => {
+            await validateOutput(testCase).catch((e) => {
                 expect(e).to.not.exist;
             });
         }
