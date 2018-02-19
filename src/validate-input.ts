@@ -8,14 +8,14 @@ export async function validateInput (dirs: string[], ...args: any[]): Promise<vo
     if ([...arguments].length === 0) {
         throw new SyntaxError('Expected one argument, got 0');
     } else if (args.length > 0) {
-        throw new Error(`Expected one argument, got ${args.length + 1}`);
+        throw new SyntaxError(`Expected one argument, got ${args.length + 1}`);
     } else if (!Array.isArray(dirs)) {
-        throw new Error(`Expected array, got ${typeof dirs}`);
+        throw new TypeError(`Expected array, got ${typeof dirs}`);
     // tslint:disable-next-line:strict-type-predicates
     } else if (!dirs.every(e => typeof e === 'string')) {
-        throw new Error('Expected an array of strings');
+        throw new TypeError('Expected an array of strings');
     } else if (dirs.length < 2) {
-        throw new Error('Expected an array of at least length 2');
+        throw new SyntaxError('Expected an array of at least length 2');
     }
 
     for (const dir of dirs) {

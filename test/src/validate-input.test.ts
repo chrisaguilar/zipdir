@@ -29,6 +29,7 @@ describe('validate-input', () => {
         for (const testCase of testCases) {
             await validateInput(testCase as any).catch(e => {
                 expect(e.message).to.equal(`Expected array, got ${typeof testCase}`);
+                expect(e.name).to.equal('TypeError');
             });
         }
     });
@@ -39,6 +40,7 @@ describe('validate-input', () => {
         for (const testCase of testCases) {
             await validateInput(testCase as any).catch(e => {
                 expect(e.message).to.equal('Expected an array of strings');
+                expect(e.name).to.equal('TypeError');
             });
         }
     });
@@ -48,6 +50,7 @@ describe('validate-input', () => {
         for (const testCase of testCases) {
             await validateInput(testCase as any).catch(e => {
                 expect(e.message).to.equal('Expected an array of at least length 2');
+                expect(e.name).to.equal('SyntaxError');
             });
         }
     });
@@ -58,6 +61,7 @@ describe('validate-input', () => {
         for (const testCase of testCases) {
             await validateInput(...(testCase as any)).catch(e => {
                 expect(e.message).to.equal(`Expected one argument, got ${testCase.length}`);
+                expect(e.name).to.equal('SyntaxError');
             });
         }
     });
@@ -74,6 +78,7 @@ describe('validate-input', () => {
         for (const [i, testCase] of Object.entries(testCases)) {
             await validateInput(testCase as any).catch(e => {
                 expect(e.message).to.equal(`"${path.resolve(testCase[+i])}" is not a file or directory`);
+                expect(e.name).to.equal('Error');
             });
         }
     });
@@ -89,6 +94,7 @@ describe('validate-input', () => {
         for (const testCase of testCases) {
             await validateInput(testCase as any).catch(e => {
                 expect(e.message).to.equal(`"${file1}" is not a directory`);
+                expect(e.name).to.equal('Error');
             });
         }
     });
