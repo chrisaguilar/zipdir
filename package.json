@@ -4,6 +4,7 @@
     "description": "_work in progress_",
     "main": "index.js",
     "scripts": {
+        "cleanup": "rimraf .nyc_output coverage",
         "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "coverage:view": "opn coverage/index.html",
         "lint": "tslint --project . --fix",
@@ -24,6 +25,7 @@
     "dependencies": {
         "fs-extra": "^5.0.0",
         "inquirer": "^5.1.0",
+        "progress": "^2.0.0",
         "sanitize-filename": "^1.6.1"
     },
     "devDependencies": {
@@ -36,6 +38,7 @@
         "@types/inquirer": "0.0.36",
         "@types/mocha": "^2.2.48",
         "@types/node": "^9.4.6",
+        "@types/progress": "^2.0.1",
         "@types/sanitize-filename": "^1.1.28",
         "@types/sinon": "^4.1.3",
         "@types/webpack": "^3.8.8",
@@ -50,7 +53,6 @@
         "husky": "^0.14.3",
         "lint-staged": "^6.1.1",
         "mocha": "^5.0.1",
-        "nodemon": "^1.15.0",
         "npm-run-all": "^4.1.2",
         "nyc": "^11.5.0",
         "opn-cli": "^3.1.0",
