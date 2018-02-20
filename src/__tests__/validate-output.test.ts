@@ -1,5 +1,4 @@
 // tslint:disable
-import { expect } from 'chai';
 import * as fs from 'fs-extra';
 
 import { validateOutput } from '~zipdir/validate-output';
@@ -9,13 +8,13 @@ describe('validate-output', () => {
     const dir2 = 'testDir2';
     const file1 = `${dir1}/foobar.txt`;
 
-    before(async () => {
+    beforeAll(async () => {
         await fs.mkdir(dir1);
         await fs.mkdir(dir2);
         await fs.ensureFile(file1);
     });
 
-    after(async () => {
+    afterAll(async () => {
         await fs.remove(dir1);
         await fs.remove(dir2);
     });
@@ -25,8 +24,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(...testCase).catch((e) => {
-                expect(e.message).to.equal(`Expected one argument, got ${testCase.length}`);
-                expect(e.name).to.equal('SyntaxError');
+                expect(e.message).toEqual(`Expected one argument, got ${testCase.length}`);
+                expect(e.name).toEqual('SyntaxError');
             });
         }
     });
@@ -36,8 +35,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase as any).catch((e) => {
-                expect(e.message).to.equal(`Expected string, got ${typeof testCase}`);
-                expect(e.name).to.equal('TypeError');
+                expect(e.message).toEqual(`Expected string, got ${typeof testCase}`);
+                expect(e.name).toEqual('TypeError');
             });
         }
     });
@@ -47,8 +46,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch((e) => {
-                expect(e.message).to.equal(`Expected valid filename, got "${testCase}"`);
-                expect(e.name).to.equal('Error');
+                expect(e.message).toEqual(`Expected valid filename, got "${testCase}"`);
+                expect(e.name).toEqual('Error');
             });
         }
     });
@@ -58,8 +57,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch((e) => {
-                expect(e.message).to.equal(`Expected "${testCase}" to be a directory`);
-                expect(e.name).to.equal('Error');
+                expect(e.message).toEqual(`Expected "${testCase}" to be a directory`);
+                expect(e.name).toEqual('Error');
             });
         }
     });
@@ -69,8 +68,8 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch((e) => {
-                expect(e.message).to.equal(`Expected directory "${testCase}" to be empty`);
-                expect(e.name).to.equal('Error');
+                expect(e.message).toEqual(`Expected directory "${testCase}" to be empty`);
+                expect(e.name).toEqual('Error');
             });
         }
     });
@@ -80,7 +79,7 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch((e) => {
-                expect(e).to.not.exist;
+                expect(e).toBeUndefined();
             });
         }
     });
@@ -90,7 +89,7 @@ describe('validate-output', () => {
 
         for (const testCase of testCases) {
             await validateOutput(testCase).catch((e) => {
-                expect(e).to.not.exist;
+                expect(e).toBeUndefined();
             });
         }
     });

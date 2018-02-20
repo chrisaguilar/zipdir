@@ -12,6 +12,6 @@ before_install:
 install:
     - npm install
 script:
-    - npm test
+    - npm run test -- --ci
 after_success:
     - npm run coverage

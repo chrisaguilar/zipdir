@@ -6,6 +6,7 @@
         "alwaysStrict": true,
         "baseUrl": "./",
         "declaration": true,
+        "module": "esnext",
         "moduleResolution": "node",
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,

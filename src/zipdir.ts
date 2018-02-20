@@ -18,7 +18,7 @@ export async function zip (dirs: string[], outDir: string) {
 
         // Traverse through the merged structure and copy files to their destination
         const barDisplay = '[:bar] :current of :total :name';
-        const bar = new ProgressBar(barDisplay, { total: mergedDirStructure.length, width: 50 });
+        const bar = new ProgressBar(barDisplay, { total: mergedDirStructure.length, width: 25 });
 
         for (const file of mergedDirStructure) {
             bar.tick({ name: (file[1] as File).name || (file[1] as File[])[0].name });

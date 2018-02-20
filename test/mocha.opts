@@ -1,5 +1,0 @@
---require ./test/ts-bootstrap.js
---require source-map-support/register
---sort
---recursive
-test/**/*.test.ts
